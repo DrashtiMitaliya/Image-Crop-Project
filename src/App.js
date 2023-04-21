@@ -1,10 +1,10 @@
 
 import './App.css';
-import Image from './Image';
+import Image from './Components/Image';
 import { ChakraProvider } from '@chakra-ui/react'
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       <ChakraProvider>
       <Image/>
       </ChakraProvider>

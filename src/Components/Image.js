@@ -8,8 +8,8 @@ import {
     ButtonGroup,
     Button
 } from '@chakra-ui/react'
-import { canvasPreview } from './canvasPreview'
-import useDebounceEffect from './useDebounceEffect'
+import { canvasPreview } from '../Utils/canvasPreview'
+import useDebounceEffect from '../Utils/useDebounceEffect'
 import 'react-image-crop/dist/ReactCrop.css'
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
@@ -106,31 +106,31 @@ const Image = () => {
     )
 
 
-
-
-
     return (
-        <div className='container mt-5'>
+        <div className='container p-5'>
+
+            <h1>CROP-YOUR-IMAGE</h1>
             <FormControl>
                 <FormLabel>Choose Image </FormLabel>
                 <Input type='file' accept="image/*" onChange={onSelectFile} />
             </FormControl>
 
 
-        <div className='my-3 '>
+        <div className='my-1  p-2 w-100 h-50 '>
         {!!imgSrc && (
                 <ReactCrop
-                    style={{padding: '5px'}}
+                    style={{padding: '5px'} }
                     crop={crop}
                     onChange={(_, percentCrop) => setCrop(percentCrop)}
                     onComplete={(c) => setCompletedCrop(c)}
                     aspect={aspect}
                 >
                     <img
+                    className='border p-2'
                         ref={imgRef}
                         alt="Crop me"
                         src={imgSrc}
-                        style={{ transform: `scale(${scale}) rotate(${rotate}deg)` }}
+                        style={{ transform: `scale(${scale}) rotate(${rotate}deg)`  ,objectFit:'cover' ,margin:'auto' }}
                         onLoad={onImageLoad}
                     />
                 </ReactCrop>
@@ -140,12 +140,11 @@ const Image = () => {
 
             {!!completedCrop && (
                 <>
-                    <div>
-                        <canvas className='my-3'
+                    <div >
+                        <canvas className='my-1 p-1 border'
                             ref={previewCanvasRef}
                             style={{
                                 margin :'auto' ,
-                                border: '1px solid black',
                                 objectFit: 'contain',
                                 width: completedCrop.width,
                                 height: completedCrop.height,
@@ -153,7 +152,7 @@ const Image = () => {
                         />
                     </div>
                     <div>
-                        <ButtonGroup  spacing='6'>
+                        <ButtonGroup  spacing='6' className='mt-2'>
                             <Button colorScheme='blue' onClick={onDownloadCropClick}>Download Cropped Image</Button>
                         </ButtonGroup>
                         <a
